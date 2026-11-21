@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+      int left = 0;
+        int maxLength = 0;
+        set<char> seen;
+
+        for (int right = 0; right < s.length(); right++) {
+
+            // Remove characters until there is no duplicate
+            while (seen.count(s[right])) {
+                seen.erase(s[left]);
+                left++;
+            }
+
+            // Add the current character to the set
+            seen.insert(s[right]);
+
+            // Calculate the length of the current window
+            int length = right - left + 1;
+
+            // Update the longest length
+            maxLength = max(maxLength, length);
+        }
+
+        return maxLength;
+      
+    }
+};
